@@ -9,12 +9,6 @@ The script installs the server, dependencies, and plugins automatically.
 Run the installer with:
 
 ```
-bash <(curl -fsSL https://raw.githubusercontent.com/swastik-satpathy/cs2-server-manager/main/cs2-retakes-installer/install.sh)
-```
-
-Or clone the repository and run locally:
-
-```
 git clone https://github.com/swastik-satpathy/cs2-server-manager.git
 cd cs2-server-manager/cs2-retakes-installer
 chmod +x install.sh
