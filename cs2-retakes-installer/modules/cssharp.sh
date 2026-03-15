@@ -1,3 +1,12 @@
+echo "Checking CounterStrikeSharp..."
+
+CSS_PATH="/home/cs2server/serverfiles/game/csgo/addons/counterstrikesharp"
+
+if [ -d "$CSS_PATH" ]; then
+    echo "CounterStrikeSharp already installed. Skipping."
+    exit 0
+fi
+
 echo "Installing CounterStrikeSharp..."
 
 LATEST=$(curl -s https://api.github.com/repos/roflmuffin/CounterStrikeSharp/releases/latest \
