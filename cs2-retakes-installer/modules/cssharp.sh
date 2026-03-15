@@ -4,8 +4,7 @@ CSS_PATH="/home/cs2server/serverfiles/game/csgo/addons/counterstrikesharp"
 
 if [ -d "$CSS_PATH" ]; then
     echo "CounterStrikeSharp already installed. Skipping."
-    exit 0
-fi
+    return
 
 echo "Installing CounterStrikeSharp..."
 
