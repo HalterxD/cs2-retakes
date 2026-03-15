@@ -46,8 +46,13 @@ for plugin in $(jq -r 'keys[]' "$PLUGINS_JSON"); do
 
     if [ -d "addons" ]; then
         cp -r addons/* /home/cs2server/serverfiles/game/csgo/addons/
+    
+    elif [ -d "counterstrikesharp" ]; then
+        mkdir -p /home/cs2server/serverfiles/game/csgo/addons/counterstrikesharp
+        cp -r counterstrikesharp/* /home/cs2server/serverfiles/game/csgo/addons/counterstrikesharp/
+    
     else
-        echo "Warning: $plugin archive missing addons folder"
+        echo "Unknown archive structure for $plugin"
     fi
 
     rm -rf "$TMP_DIR"
