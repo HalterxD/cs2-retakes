@@ -80,49 +80,17 @@ else
     fi
 fi
 
-########################################
-# Run modules (safe execution)
-########################################
 
-run_module() {
-    MODULE="$1"
-
-    if [ -f "$MODULE" ]; then
-        echo ""
-        echo "Running module: $MODULE"
-        source "$MODULE" || echo "Module $MODULE failed — continuing."
-    else
-        echo "Skipping missing module: $MODULE"
-    fi
-}
-
-run_module modules/dependencies.sh
-run_module modules/lgsm.sh
-run_module modules/metamod.sh
-run_module modules/cssharp.sh
-run_module modules/database.sh
-run_module modules/plugins.sh
-run_module modules/config.sh
-run_module modules/admin.sh
-run_module modules/cron.sh
-
-
-########################################
-# Patch gameinfo.gi for Metamod
-########################################
-
-GAMEINFO="/home/cs2server/serverfiles/game/csgo/gameinfo.gi"
-
-if [ -f "$GAMEINFO" ]; then
-    if grep -q "addons/metamod" "$GAMEINFO"; then
-        echo "Metamod path already present in gameinfo.gi"
-    else
-        echo "Patching gameinfo.gi to load Metamod"
-        sed -i '/SearchPaths/a\ \ \ \ Game\tcsgo/addons/metamod' "$GAMEINFO"
-    fi
-else
-    echo "Warning: gameinfo.gi not found"
-fi
+source modules/dependencies.sh
+source modules/lgsm.sh
+source modules/metamod.sh
+source modules/cssharp.sh
+source modules/database.sh
+source modules/plugins.sh
+source modules/config.sh
+source modules/admin.sh
+source modules/cron.sh
+source modules/gameinfo.sh
 
 ########################################
 # Restart server so plugins load
