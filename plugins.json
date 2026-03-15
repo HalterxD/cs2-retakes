@@ -27,7 +27,7 @@
       "retakes"
     ],
     "postInstall": [],
-    "enabled": true
+    "enabled": false
   },
   "instadefuse": {
     "name": "InstadefusePlugin",

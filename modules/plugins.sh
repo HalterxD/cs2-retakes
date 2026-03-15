@@ -56,7 +56,25 @@ for plugin in $(jq -r 'keys[]' "$PLUGINS_JSON"); do
     mkdir -p "$DEST"
 
     echo "Copying files..."
-    cp -r "$SRC"/* "$DEST/"
+    # Detect plugin dlls
+    for dll in $(find "$TMP_DIR/$EXTRACT_PATH" -name "*.dll"); do
+    
+        PLUGIN_NAME=$(basename "$dll" .dll)
+    
+        echo "Installing plugin: $PLUGIN_NAME"
+    
+        DEST="$SERVER_DIR/$INSTALL_PATH/$PLUGIN_NAME"
+    
+        mkdir -p "$DEST"
+    
+        cp "$dll" "$DEST/"
+    
+        # copy pdb if exists
+        if [ -f "${dll%.dll}.pdb" ]; then
+            cp "${dll%.dll}.pdb" "$DEST/"
+        fi
+    
+    done
 
     ########################################
     # Optional config copy
