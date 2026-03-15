@@ -9,7 +9,7 @@ chmod +x linuxgsm.sh
 
 ./linuxgsm.sh cs2server
 
-yes "" | ./cs2server install
+./cs2server install -y
 
 EOF
 
