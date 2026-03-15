@@ -12,7 +12,9 @@ if [ ! -f "$PLUGINS_JSON" ]; then
     return
 fi
 
-PLUGIN_DIR="/home/cs2server/serverfiles/game/csgo/addons/counterstrikesharp/plugins"
+SERVER_DIR="/home/cs2server/serverfiles/game/csgo"
+ADDONS_DIR="$SERVER_DIR/addons"
+PLUGIN_DIR="$ADDONS_DIR/counterstrikesharp/plugins"
 
 mkdir -p "$PLUGIN_DIR"
 
@@ -41,20 +43,41 @@ for plugin in $(jq -r 'keys[]' "$PLUGINS_JSON"); do
     cd "$TMP_DIR" || exit
 
     wget -q "$URL" -O plugin.zip
-
     unzip -q plugin.zip
 
+    ########################################
+    # Detect plugin structure automatically
+    ########################################
+
     if [ -d "addons" ]; then
-        cp -r addons/* /home/cs2server/serverfiles/game/csgo/addons/
-    
-    elif [ -d "counterstrikesharp" ]; then
-        mkdir -p /home/cs2server/serverfiles/game/csgo/addons/counterstrikesharp
-        cp -r counterstrikesharp/* /home/cs2server/serverfiles/game/csgo/addons/counterstrikesharp/
-    
+
+        echo "Detected addons structure"
+        cp -r addons/* "$ADDONS_DIR/"
+
+    elif find . -type d -name "counterstrikesharp" | grep -q .; then
+
+        echo "Detected counterstrikesharp structure"
+
+        SRC=$(find . -type d -name "counterstrikesharp" | head -n1)
+        cp -r "$SRC"/* "$ADDONS_DIR/counterstrikesharp/"
+
+    elif find . -type d -name "plugins" | grep -q .; then
+
+        echo "Detected plugins directory"
+
+        SRC=$(find . -type d -name "plugins" | head -n1)
+        cp -r "$SRC"/* "$PLUGIN_DIR/"
+
     else
-        echo "Unknown archive structure for $plugin"
+
+        echo "Attempting fallback install"
+
+        mkdir -p "$PLUGIN_DIR/$plugin"
+        cp -r ./* "$PLUGIN_DIR/$plugin/" 2>/dev/null || true
+
     fi
 
+    cd /tmp
     rm -rf "$TMP_DIR"
 
 done

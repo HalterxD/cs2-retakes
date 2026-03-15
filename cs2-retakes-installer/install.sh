@@ -1,5 +1,5 @@
 #!/bin/bash
-
+export DEBIAN_FRONTEND=noninteractive
 set -euo pipefail
 
 # Always run from installer directory
@@ -73,6 +73,7 @@ run_module modules/metamod.sh
 run_module modules/cssharp.sh
 run_module modules/database.sh
 run_module modules/plugins.sh
+run_module modules/config.sh
 run_module modules/admin.sh
 run_module modules/cron.sh
 
@@ -92,23 +93,6 @@ if [ -f "$GAMEINFO" ]; then
     fi
 else
     echo "Warning: gameinfo.gi not found"
-fi
-
-########################################
-# Install server.cfg if missing
-########################################
-
-CONFIG="/home/cs2server/serverfiles/game/csgo/cfg/server.cfg"
-
-if [ ! -f "$CONFIG" ]; then
-    echo "Installing server.cfg template"
-
-    cp templates/server.cfg "$CONFIG"
-
-    sed -i "s/{{SERVER_NAME}}/${SERVER_NAME:-CS2 Retakes Server}/" "$CONFIG"
-    sed -i "s/{{SERVER_TAGS}}/${SERVER_TAGS:-retakes}/" "$CONFIG"
-else
-    echo "server.cfg already exists — skipping"
 fi
 
 ########################################
