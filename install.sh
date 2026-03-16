@@ -90,7 +90,7 @@ source modules/cron.sh
 source modules/gameinfo.sh
 source modules/config.sh
 source modules/plugins.sh
-source modules/admin.sh
+# source modules/admin.sh
 
 
 ########################################
