@@ -1,6 +1,8 @@
 #!/bin/bash
 
-ENV_FILE=".env"
+# Use SCRIPT_DIR from parent script, fallback to current directory
+SCRIPT_DIR="${SCRIPT_DIR:-.}"
+ENV_FILE="$SCRIPT_DIR/.env"
 
 # Load env if exists
 if [ -f "$ENV_FILE" ]; then
