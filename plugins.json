@@ -5,7 +5,7 @@
     "folders": ["plugins", "shared"],
     "copyPaths": [
       { "from": "addons/counterstrikesharp/plugins", "to": "addons/counterstrikesharp/plugins" },
-      { "from": "addons/counterstrikesharp/shared", "to": "addons/counterstrikesharp/plugins/shared" }
+      { "from": "addons/counterstrikesharp/shared", "to": "addons/counterstrikesharp/shared" }
     ]
   },
   "instadefuse": {

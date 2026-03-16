@@ -53,6 +53,9 @@ for plugin in $(jq -r 'keys[]' "$PLUGINS_JSON"); do
 
     echo "Extracting..."
     unzip -q plugin.zip
+    
+    # Clean up zip file to avoid copying it
+    rm -f plugin.zip
 
     ########################################
     # copyPaths support
