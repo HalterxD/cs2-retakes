@@ -7,7 +7,7 @@ GAMEINFO="/home/cs2server/serverfiles/game/csgo/gameinfo.gi"
 # Check if already configured
 if grep -q "csgo/addons/metamod" "$GAMEINFO"; then
     echo "Metamod already configured in gameinfo.gi"
-    exit 0
+    return
 fi
 
 # Insert right after Game_LowViolence csgo_lv line with proper indentation
