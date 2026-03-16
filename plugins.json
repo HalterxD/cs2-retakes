@@ -6,28 +6,20 @@
     "description": "Core retakes gameplay plugin",
     "url": "https://github.com/B3none/cs2-retakes/releases/download/3.0.3/RetakesPlugin-3.0.3.zip",
     "extractPath": "RetakesPlugin",
-    "installPath": "addons/counterstrikesharp/plugins",
-    "configCopy": {
-      "from": "cfg",
-      "to": "cfg"
-    },
+    "installPath": "addons/counterstrikesharp",
+    "copyPaths": [
+      {
+        "from": "addons/counterstrikesharp/plugins",
+        "to": "addons/counterstrikesharp/plugins"
+      },
+      {
+        "from": "addons/counterstrikesharp/shared",
+        "to": "addons/counterstrikesharp/shared"
+      }
+    ],
     "dependencies": [],
     "postInstall": [],
     "enabled": true
-  },
-  "allocator": {
-    "name": "RetakesAllocator",
-    "version": "2.4.2",
-    "author": "yonilerner",
-    "description": "Team allocator for retakes",
-    "url": "https://github.com/yonilerner/cs2-retakes-allocator/releases/download/v2.4.2/cs2-retakes-allocator-v2.4.2.zip",
-    "extractPath": "RetakesAllocator",
-    "installPath": "addons/counterstrikesharp/plugins",
-    "dependencies": [
-      "retakes"
-    ],
-    "postInstall": [],
-    "enabled": false
   },
   "instadefuse": {
     "name": "InstadefusePlugin",
@@ -36,7 +28,13 @@
     "description": "Instant bomb defuse plugin",
     "url": "https://github.com/B3none/cs2-instadefuse/releases/download/2.0.0/cs2-instadefuse-2.0.0.zip",
     "extractPath": "InstadefusePlugin",
-    "installPath": "addons/counterstrikesharp/plugins",
+    "installPath": "addons/counterstrikesharp",
+    "copyPaths": [
+      {
+        "from": "addons/counterstrikesharp/plugins",
+        "to": "addons/counterstrikesharp/plugins"
+      }
+    ],
     "dependencies": [],
     "postInstall": [],
     "enabled": true
@@ -48,7 +46,13 @@
     "description": "Announces clutch situations",
     "url": "https://github.com/B3none/cs2-clutch-announce/releases/download/1.1.0/cs2-clutch-announce-1.1.0.zip",
     "extractPath": "ClutchAnnouncePlugin",
-    "installPath": "addons/counterstrikesharp/plugins",
+    "installPath": "addons/counterstrikesharp",
+    "copyPaths": [
+      {
+        "from": "addons/counterstrikesharp/plugins",
+        "to": "addons/counterstrikesharp/plugins"
+      }
+    ],
     "dependencies": [],
     "postInstall": [],
     "enabled": true
@@ -60,7 +64,13 @@
     "description": "Allows players to vote to change maps",
     "url": "https://github.com/Oz-Lin/cs2-rockthevote/releases/download/v1.9.6/RockTheVote-v1.9.6.RELEASE.zip",
     "extractPath": "RockTheVote",
-    "installPath": "addons/counterstrikesharp/plugins",
+    "installPath": "addons/counterstrikesharp",
+    "copyPaths": [
+      {
+        "from": "addons/counterstrikesharp/plugins",
+        "to": "addons/counterstrikesharp/plugins"
+      }
+    ],
     "dependencies": [],
     "postInstall": [],
     "enabled": false
@@ -72,7 +82,13 @@
     "description": "Simple admin plugin for CS2",
     "url": "https://github.com/daffyyyy/CS2-SimpleAdmin/releases/download/build-1.7.8-beta-10b1/CS2-SimpleAdmin-1.7.8-beta-10b1.zip",
     "extractPath": "CS2-SimpleAdmin",
-    "installPath": "addons/counterstrikesharp/plugins",
+    "installPath": "addons/counterstrikesharp",
+    "copyPaths": [
+      {
+        "from": "addons/counterstrikesharp/plugins",
+        "to": "addons/counterstrikesharp/plugins"
+      }
+    ],
     "dependencies": [],
     "postInstall": [],
     "enabled": false

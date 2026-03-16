@@ -6,7 +6,6 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(dirname "$SCRIPT_DIR")"
 
 PLUGINS_JSON="$ROOT_DIR/plugins.json"
-
 SERVER_DIR="/home/cs2server/serverfiles/game/csgo"
 
 if [ ! -f "$PLUGINS_JSON" ]; then
@@ -33,10 +32,8 @@ for plugin in $(jq -r 'keys[]' "$PLUGINS_JSON"); do
     echo "Installing $NAME ($VERSION)"
 
     TMP_DIR="/tmp/plugin-$plugin"
-
     rm -rf "$TMP_DIR"
     mkdir -p "$TMP_DIR"
-
     cd "$TMP_DIR" || exit
 
     echo "Downloading..."
@@ -55,49 +52,43 @@ for plugin in $(jq -r 'keys[]' "$PLUGINS_JSON"); do
 
     mkdir -p "$DEST"
 
-    echo "Copying files..."
-    # Detect plugin dlls
-    for dll in $(find "$TMP_DIR/$EXTRACT_PATH" -name "*.dll"); do
-    
+    ########################################
+    # Copy plugin DLLs
+    ########################################
+    echo "Copying plugin DLLs..."
+    for dll in $(find "$SRC" -name "*.dll"); do
         PLUGIN_NAME=$(basename "$dll" .dll)
-    
-        echo "Installing plugin: $PLUGIN_NAME"
-    
-        DEST="$SERVER_DIR/$INSTALL_PATH/$PLUGIN_NAME"
-    
-        mkdir -p "$DEST"
-    
-        cp "$dll" "$DEST/"
-    
+        PLUGIN_DEST="$DEST/$PLUGIN_NAME"
+        mkdir -p "$PLUGIN_DEST"
+        cp "$dll" "$PLUGIN_DEST/"
         # copy pdb if exists
         if [ -f "${dll%.dll}.pdb" ]; then
-            cp "${dll%.dll}.pdb" "$DEST/"
+            cp "${dll%.dll}.pdb" "$PLUGIN_DEST/"
         fi
-    
+        echo "Installed plugin: $PLUGIN_NAME"
     done
 
     ########################################
-    # Optional config copy
+    # copyPaths support
     ########################################
-
-    CONFIG_FROM=$(jq -r ".\"$plugin\".configCopy.from // empty" "$PLUGINS_JSON")
-    CONFIG_TO=$(jq -r ".\"$plugin\".configCopy.to // empty" "$PLUGINS_JSON")
-
-    if [ -n "$CONFIG_FROM" ] && [ -d "$TMP_DIR/$CONFIG_FROM" ]; then
-
-        echo "Copying config files..."
-
-        mkdir -p "$SERVER_DIR/$CONFIG_TO"
-        cp -r "$TMP_DIR/$CONFIG_FROM"/* "$SERVER_DIR/$CONFIG_TO/"
-
-    fi
+    jq -c ".\"$plugin\".copyPaths[]?" "$PLUGINS_JSON" | while read -r path; do
+        FROM=$(echo "$path" | jq -r '.from')
+        TO=$(echo "$path" | jq -r '.to')
+        SRC_PATH="$SRC/$FROM"
+        DEST_PATH="$SERVER_DIR/$TO"
+        if [ -d "$SRC_PATH" ]; then
+            echo "Copying from $SRC_PATH to $DEST_PATH..."
+            mkdir -p "$DEST_PATH"
+            cp -r "$SRC_PATH/"* "$DEST_PATH/"
+        else
+            echo "Warning: copyPaths source $SRC_PATH does not exist!"
+        fi
+    done
 
     ########################################
     # Post install commands
     ########################################
-
     echo "Running post-install commands..."
-
     jq -r ".\"$plugin\".postInstall[]?" "$PLUGINS_JSON" | while read -r cmd; do
         eval "$cmd"
     done
@@ -113,7 +104,6 @@ echo ""
 echo "Plugin installation complete."
 
 PLUGIN_DIR="$SERVER_DIR/addons/counterstrikesharp/plugins"
-
 if [ -d "$PLUGIN_DIR" ]; then
     echo ""
     echo "Installed CounterStrikeSharp plugins:"
