@@ -5,7 +5,7 @@
     "author": "B3none",
     "description": "Core retakes gameplay plugin",
     "url": "https://github.com/B3none/cs2-retakes/releases/download/3.0.3/RetakesPlugin-3.0.3.zip",
-    "extractPath": "addons",
+    "extractPath": "RetakesPlugin",
     "installPath": "addons/counterstrikesharp/plugins",
     "configCopy": {
       "from": "cfg",
