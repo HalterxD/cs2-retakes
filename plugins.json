@@ -4,8 +4,8 @@
     "enabled": true,
     "folders": ["plugins", "shared"],
     "copyPaths": [
-      { "from": "plugins", "to": "addons/counterstrikesharp/plugins" },
-      { "from": "shared", "to": "csgo/addons/counterstrikesharp/plugins/shared" }
+      { "from": "addons/counterstrikesharp/plugins", "to": "addons/counterstrikesharp/plugins" },
+      { "from": "addons/counterstrikesharp/plugins/shared", "to": "addons/counterstrikesharp/plugins/shared" }
     ]
   },
   "instadefuse": {
@@ -13,7 +13,7 @@
     "enabled": true,
     "folders": ["plugins"],
     "copyPaths": [
-      { "from": "plugins", "to": "addons/counterstrikesharp/plugins" }
+      { "from": "addons/counterstrikesharp/plugins", "to": "addons/counterstrikesharp/plugins" }
     ]
   },
   "clutchannounce": {
@@ -21,7 +21,7 @@
     "enabled": true,
     "folders": ["plugins"],
     "copyPaths": [
-      { "from": "plugins", "to": "addons/counterstrikesharp/plugins" }
+      { "from": "addons/counterstrikesharp/plugins", "to": "addons/counterstrikesharp/plugins" }
     ]
   },
   "rtv": {
@@ -29,7 +29,7 @@
     "enabled": false,
     "folders": ["plugins"],
     "copyPaths": [
-      { "from": "plugins", "to": "addons/counterstrikesharp/plugins" }
+      { "from": "addons/counterstrikesharp/plugins", "to": "addons/counterstrikesharp/plugins" }
     ]
   },
   "simpleadmin": {
@@ -37,7 +37,7 @@
     "enabled": false,
     "folders": ["plugins"],
     "copyPaths": [
-      { "from": "plugins", "to": "addons/counterstrikesharp/plugins" }
+      { "from": "addons/counterstrikesharp/plugins", "to": "addons/counterstrikesharp/plugins" }
     ]
   }
 }
