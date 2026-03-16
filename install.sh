@@ -86,11 +86,12 @@ source modules/lgsm.sh
 source modules/metamod.sh
 source modules/cssharp.sh
 source modules/database.sh
-source modules/plugins.sh
-source modules/config.sh
-source modules/admin.sh
 source modules/cron.sh
 source modules/gameinfo.sh
+source modules/config.sh
+source modules/plugins.sh
+source modules/admin.sh
+
 
 ########################################
 # Restart server so plugins load
